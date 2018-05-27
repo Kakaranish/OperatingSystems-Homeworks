@@ -1,0 +1,41 @@
+========================================================================
+Autor: Stanisław Gruz,                               Krakow, 03.04.2017
+========================================================================
+
+* Zawartosc:
+============
+Zawartość folderu: obsluga.c wyslij.c grupa.c README Makefile
+
+Polecenie:
+"Napisać program do obsługi i przechwytywania sygnałów z możliwościami (1) wykonania operacji domyślnej, (2) ignorowania oraz (3) przechwycenia i własnej obsługi sygnału (np. numer sygnału oraz opcję obsługi przekazywać za pomocą argumentów wywołania programu)
+a) Uruchomić program i wysłać do niego sygnały przy pomocy sekwencji klawiszy oraz przy pomocy polecenia kill
+b)Uruchomić powyższy program poprzez funkcję exec w procesie potomnym innego procesu i wysłać do niego sygnały poprzez funkcję systemową kill z procesu macierzystego.
+c) Uruchomić grupę kilku procesów i wysłać sygnały do całej grupy procesów"
+
+MOJE ROZWIĄZANIA:
+a) wpisujemy w konsoli ./obsluga.o a b, gdzie a b to argumenty obslugi sygnalow, uruchamia się pętla, która sygnalizuje nam czy proces działa czy też nie. Przy pomocy konsolowej komendy "kill -id pid" mozemy zabic, proces chyba, ze akurat zadana obsługa sygnału to ignorowanie
+b) wpisujemy w konsoli ./wyslij.o a b, gdzie a b to argumenty obslugi sygnalow. Uruchomiony zostaje program obsluga.o za pomocą execl, a następnie zabity za pomocą funkcji systemowej int kill(pid_t pid, int signal)
+c) wpisujemy w konsoli ./grupa.o a b, gdzie a b to argumenty obslugi sygnalow.
+Zachodzi analogiczna sytuacja co w punkcie b, jednakże tworzymy wiele procesów, i wysyłamy sygnał zabijający do całej grupy procesów.
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby skompilowac programy
+       make 
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
+
+
+

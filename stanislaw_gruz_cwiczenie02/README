@@ -1,0 +1,47 @@
+========================================================================
+Autor: Stanisław Gruz,                               Krakow, 21.03.2017
+========================================================================
+
+* Zawartosc:
+============
+Zawartość folderu: main.c executable_file.c procesy.h README Makefile
+Działanie programu:
+- Program wypisuje UID, GID, PID, PPID, PGID dla danego procesu za pomocą funkcji showProcessInfo()
+- Wywołuje 3 razy funkcję fork() i w każdym nowoutworzonym procesie za pomocą funkcji bibliotecznej execl() inicjalizuje program wykonywalny, którego zadaniem jest wypisanie informacji o procesie za pomocą utworzonej funkcji showProcessInfo()
+
+
+- "Ile powstaje procesów i dlaczego?" - otrzymamy dokładnie 4 procesy na koniec programu - 3 procesy potomne powstałe wskutek użycia funkcji fork() i 1 macierzysyty, który był duplikowany. 
+Gdybyśmy nie użyli funkcji execl() w programie, wówczas powstałoby 8 procesów, ponieważ podczas podczas każdej iteracji pętli wszystkie powstałe dotychczasowo procesy(potomne + macierzysty) duplikowałyby się.
+W przypadku, gdy w nowopowstałym procesie zainicjalizowaliśmy program wykonywalny, instrukcje skopiowane z procesu macierzystego zostały nadpisane poprzez instrukcje owego programu.
+Drzewo programu
+
+		  M
+	     /          \
+	    M  	         C1
+	  /  \           |   
+	 M     C2       instrukcje programu
+	/ \    | instrukcje programu
+       M  C3
+	   |instrukcje programu
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic i skompilowac program, nalezy wykonac komende:
+       make 
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
+
+
+

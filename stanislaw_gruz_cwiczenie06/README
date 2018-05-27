@@ -1,0 +1,36 @@
+========================================================================
+Autor: Stanisław Gruz,                               Krakow, 26.04.2017
+========================================================================
+
+* Zawartosc:
+============
+Zawartość folderu: lib.c lib.h main.c powielany.c Makefile README
+
+Działanie programu:
+Program ma na celu ukazać wzajmene wykluczanie procesów poprzez użycie semafora. 
+Plik lib.h jest biblioteką funkcji niezbędnych do obsługi semafora.
+Plik lib.c zawiera definicje owych funkcji.
+
+Program główny powiela 10 razy proces i za pomocą execa uruchamia w nim program powielany.o. Każdy z uruchumionych programów czeka na to by semafor mial status 1, byc móc następnie go opuścić i wykonać operację na jakimś zasobie w sekcji krytycznej. W czasie wykonywania operacji wyswietla informacje o semaforze zawarte w poleceniu.
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic i skompilowac program, nalezy wykonac komende:
+       make 
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
+
+
+

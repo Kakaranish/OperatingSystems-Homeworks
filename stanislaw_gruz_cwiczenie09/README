@@ -1,0 +1,42 @@
+========================================================================
+Autor: Stanisław Gruz,                               Krakow, 17.05.2017
+========================================================================
+
+* Zawartosc:
+============
+Zawartość folderu: main.c Makefile README
+
+Działanie programu:
+Program ma celu ukazać problem wzajemnego wykluczania poprzez użycie mutexów. Wykluczanie odbywa się między wątkami, a nie między procesami jak w poprzednich zadaniach.
+
+Na samym początku inicjalizuję mutexa. Następnie tworzę tNum liczbę wątków, które będą wykonywały funkcję tFunction, które przyjmuje 1 argument - argument reprezentującu nr wątku.
+
+Funkcja gotoxy(x,y) służy do przejscia do danego wiersza i kolumny na ekranie.
+Sekcja krytyczna mieści się między pthread_mtuex_lock() a pthread_mutex_unlock().
+Funkcja getTerminalWidth() zwraca ile kolumn zmiesci sie w terminalu. Uzywana ze wzgledow estetycznych.
+
+
+Tak jak w poleceniu, w sekcji krytycznej tworzony jest i inicjalizowany do wartosci glownego licznika licznik tymczasowy. Następnie jest on inkrementowany, wywoływana jest funkcja usleep, po czym wartosc licznika glownego podmieniana jest wartoscia licznika tymczasowego.
+
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic i skompilowac program, nalezy wykonac komende:
+       make 
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
+
+
+

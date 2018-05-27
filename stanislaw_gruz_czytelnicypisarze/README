@@ -1,0 +1,57 @@
+========================================================================
+Autor: Stanisław Gruz,                               Krakow, 13.06.2017
+========================================================================
+
+* Zawartosc:
+============
+Zawartość folderu: main.c Makefile README
+
+Działanie programu:
+Program implementuje problem pisarzy i czytelników. Wielu czytelnikow może czytać jednocześnie w momencie, kiedy żaden pisarz nie pisze.
+Pisarz zaś musi być sam w czytelni, jeśli chce pisać.
+
+W swoim programie posłużyłem się 3 mutexami:
+- r_mutex - mutex odpowiadajacy za to, zeby tylko jeden czytelnik mogl podniesc status zmiennej globalnej reader_counter
+- output_mutex - mutex odpowiadajacy za to, aby tekst zostal wypisany w calosci - bez zadnych przerwan
+- wait_mutex - mutex odpowiadajacy za obsluge poczekalni. Pisarz przed rozpoczeciem swojej pracy, musi poczekać aby poczekalnia stala sie pusta.
+
+W swoim programie uzylem kilku funkcji pomocniczych:
+- getTerminalWidth() - zwraca ilosc kolumn w konsoli - użyta w celach estetycznych
+- gotoxy() - przesuwa wskaznik w konsoli na podane koordynaty
+- clear() - funkcja usuwajaca tekst w danej linijce
+
+W programie tworzona jest losowa ilosc czytelnikow i pisarzy, ktorych watki umieszczane sa w dynamiczne zaalokowanej tablicy.
+
+
+SCHEMAT DZIAŁANIA:
+Pisarz:
+- blokuj poczekalnię
+- czekaj, aż wszyscy czytelnicy wyjdą z czytelni
+- SEKCJA KRYTYCZNA - pisanie
+- odblkowanie poczekalni
+
+Czytelnik:
+- wchodzi do poczekalni bez blokowania jej
+- zwieksza ilosc czytelnikow w sekcji krytycznej wyznaczonej przez lock/unlock mutexu r_mutex
+- rozpoczyna czytanie
+- zmniejsza ilosc czytelnikow w sekcji krytycznej wyznaczonej prze lock/unlock mutexu r_mutex
+
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu
+i jego archiwizacji.
+
+-> Aby uruchomic i skompilowac program, nalezy wykonac komende:
+       make
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================

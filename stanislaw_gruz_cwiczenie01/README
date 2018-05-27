@@ -1,0 +1,51 @@
+========================================================================
+Autor: Stanisław Gruz,                               Krakow, 14.03.2017
+========================================================================
+
+* Zawartosc:
+============
+Zawartość folderu: main.c procesy.h README Makefile
+Działanie programu:
+- Program wypisuje UID, GID, PID, PPID, PGID dla danego procesu za pomocą showProcessInfo()
+- Wywołuje 3 razy funkcję fork()  i wypisuje wyżej wspomniane identyfikatory procesy
+- Procesy pokazują się na ekranie użytkownika pokoleniami, tzn: 
+
+    M - pierwsze pokolenie
+    C1 - drugie pokolenie //dziecko M
+    C2,C3 - trzecie pokolenie // dzieci M i C1
+    C4,C5,C6,C7 - czwarte pokolenie // Dzieci M, C1, C2, C3
+
+- "Ile powstaje procesów i dlaczego?" - na końcu, w wyniku użycia forków otrzymujemy 8 procesów.
+i = 0 - mamy proces macierzysty(M), używamy fork() i otrzymujemy proces macierzysty oraz proces pochodny (C1)
+i = 1 - mamy M i C1, otrzymujemy M, C2, C1, C3
+i = 2 - mamy M, C2, C1, C3, otrzymujemy M,C4,C2,C5,C1,C6,C3,C7
+
+		  M
+	     /          \
+	    M  	         C1
+	  /  \         /    \
+	 M     C2     C1     C3
+	/ \   /  \   /  \   /  \
+       M  C4 C2  C5 C1  C6 C3   C7 	
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic i skompilowac program, nalezy wykonac komende:
+       make 
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
+
+
+

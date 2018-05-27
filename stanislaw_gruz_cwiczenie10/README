@@ -1,0 +1,42 @@
+========================================================================
+Autor: Stanisław Gruz,                               Krakow, 24.05.2017
+========================================================================
+
+* Zawartosc:
+============
+Zawartość folderu: main.c Makefile README
+
+Działanie programu:
+Program działa analogicznie do zadania z wątkami, z tym że zamiast mutexa wbudowanego w bibliotekę pthreads, używamy 'mutexa' tworzonego własnoręcznie poprzez tzw. algorytm piekarniowy. 
+
+Początek sekcji krytycznej wyyznaczany jest poprzez:
+for(i=0; i<QUEUE_SIZE; i++) {
+            while(choosing[i]);
+            while(queueNum[i] != 0 && (queueNum[i] < queueNum[tNum] || (queueNum[i]==queueNum[tNum] && i < tNum)));}
+
+Zaś koniec sekcji krytycznej wyznaczany jest poprzez: queueNum[tNum] = 0;
+
+Poprawne działanie naszego mutexa demonstrujemy poprzez globalny licznik - counter - który jest inkrementowany w sekcji krytycznej programu. Tak jak w poprzednim zadaniu, licznik tymczasowy inicjalizujemy wartością licznika globalnego, następnie go inkrementujemy, używamy funkcji usleep, po czym wartosc licznika globalnego jest podmieniana wartoscia licznika tymczasowego.
+
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic i skompilowac program, nalezy wykonac komende:
+       make 
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
+
+
+

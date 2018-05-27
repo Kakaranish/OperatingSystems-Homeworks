@@ -1,0 +1,57 @@
+========================================================================
+Autor: Stanisław Gruz,                               Krakow, 10.04.2017
+========================================================================
+
+* Zawartosc:
+============
+Zawartość folderu: 
+-> main.c
+-> od.c
+-> do.c
+-> README
+-> Makefile
+-> res - folder zawierajacy pliki:
+	- od.txt
+	- do.txt
+->tmp - folder, w którym tworzony jest tymczasowo potok nazwany
+
+Działanie programu:
+Na samym początku w programie od.o sprawdzamy czy plik potoku już istnieje, tak abyśmy mogli prawidłowo przeprowadzić przekazywanie informacji potokiem.
+Następnie inicjalizujemy potok w programie od.o(jeśli liczba argumentów wywołania programu jest różna od 2). 
+Kolejno sprawdzamy wielkość pliku od.txt, po czym jego wartość przekazujemy potokiem programowi do.o.
+Następnie przechodzimy w programie od.o(w pętli for) do przekazywania kolejnych  znaków do potoku, które następnie zapisywane są przez program do.o do pliku o nazwie do.txt.
+Kiedy zakończy się zapis do pliku do.txt, zamykamy potok za pomocą funkcji unlink().
+
+------------------------------------------------------------------------
+POLECENIA
+
+a) Utworzyć potok FIFO z linii komend
+b) Utworzyć potok FIFO z poziomu programu
+c) Sprawdzić, że potoki FIFO działają dla niezależnych procesów (uruchomić procesy Producenta i Konstumenta niezależnie z poziomu powłoki, np. w różnych oknach konsoli)
+------------------------------------------------------------------------
+
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+PO KAŻDORAZOWYM WYKONANIU POLECENIA ZALECANE JEST UŻYCIE make clean
+->Aby wykonać polecenia a)
+	make run_a
+->Aby wykonać polecenia b)
+	make run_b
+->Aby wykonać polecenia c)
+	make run_c
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
+
+
+

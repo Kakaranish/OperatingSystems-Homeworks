@@ -1,0 +1,33 @@
+========================================================================
+Autor: Stanisław Gruz,                               Krakow, 03.04.2017
+========================================================================
+
+* Zawartosc:
+============
+Zawartość folderu: main.c od.txt do.txt Makefile README
+
+Działanie programu:
+Z pliku o nazwie od.txt pobieramy tekst co losowy odstęp czasu, a następnie przypisujemy go do tablicy buffer. Użyłem tutaj funkcji usleep((rand() % 20 +1) * 10000 ) zamiast zwykłego sleep, ponieważ zależało mi na tym, by odstęp czasu między pobraniami znaku był mniejszy niż 1 sekunda. Tablica buffer jest dynamicznie alokowana w procesie potomnym, ponieważ w momencie startu programu nie wiemy z ilu znaków składa się od.txt. 
+Poprzez użycie pipelingu, dokonuję wymiany informacji między procesem macierzystym i procesem potomnym. Każda porcja tekstu otrzymana poprzez pipeling dopisywana jest do pliku do.txt.
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic i skompilowac program, nalezy wykonac komende:
+       make 
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
+
+
+

@@ -1,0 +1,39 @@
+========================================================================
+Autor: Stanisław Gruz,                               Krakow, 17.05.2017
+========================================================================
+
+* Zawartosc:
+============
+Zawartość folderu: main.c klient.c serwer.c msg_lib.h msg_lib.c Makefile README
+
+Działanie programu:
+Za pomocą main'a uruchamiam program serwera oraz kilka konsoli, w których wykonywane są programy klienta. Na samym początku używam usleep() dla serwera, tak aby jakies komunikaty dolaczyly do kolejki. Serwer pracuje do momentu, dopóki jakieś komunikaty są w kolejce. 
+
+Każdy klient generuje samemu sobie ciąg znaków o losowej długości. Ciąg ten następnie wysyłany jest poprzez komunikat do serwera, gdzie za pomocą funkcji msgToupper(), jego litery zamieniane są na wielkie. Gdy już to się stanie, to serwera zwraca właściwy ciąg znaków klientowi.
+
+Wiadomość jest strukturą o 3 polach: 
+-> mtext - tablica znaków o określonej wielkości
+-> mtype 
+-> creatorId - pole zawierajace PID procesu, do którego ma zostać zwrócony komunikat
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic i skompilowac program, nalezy wykonac komende:
+       make 
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
+
+
+

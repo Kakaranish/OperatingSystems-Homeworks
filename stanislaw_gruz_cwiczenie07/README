@@ -1,0 +1,43 @@
+========================================================================
+Autor: Stanisław Gruz,                               Krakow, 16.05.2017
+========================================================================
+
+* Zawartosc:
+============
+Zawartość folderu: main.c od.txt do.txt sem_lib.c sem_lib.h shm_lib.c shm_lib.h README Makefile
+
+Działanie programu:
+Poprzez użycie pamięci dzielonej oraz semaforów implementuję problem Producenta-Konsumenta. Używam do tego celu wydzielonej 10-cio bajtowej pamieci, ktory sluzy nam jako bufor cykliczny. Dostęp do pamięci synchronizowany jest dzięki użyciu mechanizmu semaforów.
+
+
+Działanie krok po kroku:
+-tworzę unikalne klucze za pomocą funkcji ftok
+-za pomocą funkcji createSharedMemory używam, aby utworzyć dostęp do dzielonego segmentu pamięci
+-tworzę i inicjalizuję semaforę
+-następnie proces główny odwzorowuje dzielony segment w swój obszar danych - zyskujemy wskaznik do pamieci
+-z pliku od.txt pobierana jest zadana ilosc bajtow tekstu, a nastepnie zapisywana jest w pliku do.txt poprzez proces potomny. 
+-dostęp do zasobu, który przechowuje tekst, synchronizowany jest poprzez użycie semafora
+-jeśli zostanie napotkany znak EOF, wówczas zapis do pamieci dzielonej zostaje przerwany i pozostały tekst zostaje dopisany do pliku do.txt
+
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic i skompilowac program, nalezy wykonac komende:
+       make 
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
+
+
+
